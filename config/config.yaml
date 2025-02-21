@@ -1,0 +1,7 @@
+allfiles: "config/allfiles.tsv"
+experiments: "config/sample_sheet.tsv"
+controlgroup: "config/sample_sheet.tsv"
+
+#please update with exact modelname incase a new model is used
+basecall_model: "rna004_130bps_hac@v5.1.0"
+threads: "10"
