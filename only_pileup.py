@@ -1,0 +1,82 @@
+import pandas as pd
+import datetime
+configfile: "config/config.yaml"
+os.chdir(config["workdirection"])
+
+experiments =pd.read_csv(config["experiments"], dtype=str, sep="\t")
+controls =pd.read_csv(config["controlgroup"], dtype=str, sep="\t")
+allfiles = pd.read_csv(config["allfiles"], dtype= str, sep="\t")
+path = pd.read_csv(config["path"], dtype= str, sep="\t")
+basecall_model = config["basecall_model"]
+threads = config["threads"]
+region = config["extract_region"]
+base = config["modbase"]
+batchsize = config["batchsize"]
+genome = config["genome"]
+timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+
+
+experiments.sort_values(by=["experiment"], key=lambda col: col.str.lower() if col.dtype==str else col, inplace=True)
+controls.sort_values(by=["control"], key=lambda col: col.str.lower() if col.dtype==str else col, inplace=True)
+allfiles.sort_values(by=["allfiles"], key=lambda col: col.str.lower() if col.dtype==str else col, inplace=True)
+path.sort_values(by=["path"], key=lambda col: col.str.lower() if col.dtype==str else col, inplace=True)
+
+
+
+rule all:
+    input:
+        expand("{path}/{allfiles}/results/aligned/sorted.bam",zip,path = path["path"], allfiles= allfiles["allfiles"]),
+        expand("{path}/{allfiles}/results/aligned/summary_reads.txt", path = path["path"], allfiles= allfiles["allfiles"]),
+        expand("{path}/{allfiles}/results/aligned/indexed.bam.bai",zip, path = path["path"], allfiles= allfiles["allfiles"]),
+        expand("{path}/{allfiles}/results/pileup/pileup.bed",zip, path = path["path"], allfiles= allfiles["allfiles"])
+    output:
+        f"{timestamp}_final_marker_only_pileup.done"
+    shell:
+        """
+        python config/move.py
+        touch {output}
+        """ 
+    
+
+
+rule sort:
+    input:
+        "{path}/{allfiles}/results/aligned/{allfiles}.bam"
+    output:
+        "{path}/{allfiles}/results/aligned/sorted.bam"
+    log:
+        "{path}/{allfiles}/results/log/sorted.log"
+    shell:
+        "samtools sort {input} > {output} 2> {log}"
+
+rule summarize:
+    input:
+        "{path}/{allfiles}/results/aligned/sorted.bam"
+    output:
+        "{path}/{allfiles}/results/aligned/summary_reads.txt"
+    shell:
+        "modkit summary {input} > {output}"
+
+
+rule index:
+    input:
+        "{path}/{allfiles}/results/aligned/sorted.bam"
+    output:
+        "{path}/{allfiles}/results/aligned/indexed.bam.bai"
+    log:
+        "{path}/{allfiles}/results/log/indexed.log"
+    shell:
+        "samtools index {input} > {output} 2> {log}"
+
+rule base_count_sum:
+    input:
+        bam="{path}/{allfiles}/results/aligned/sorted.bam",
+        bam_index="{path}/{allfiles}/results/aligned/indexed.bam.bai"
+    output:
+        "{path}/{allfiles}/results/pileup/pileup.bed"
+    log:
+        "{path}/{allfiles}/results/log/pileup.log"
+    shell:
+        "modkit pileup {input.bam} {output} --log-filepath pileup.log 2> {log}"
+
+

@@ -1,0 +1,24 @@
+# no customizing required
+allfiles: "config/allfiles.tsv"
+experiments: "config/sample_sheet.tsv"
+controlgroup: "config/sample_sheet.tsv"
+path: "config/allfiles.tsv"
+
+#please update with exact modelname and its path in case a new model is used
+basecall_model: "rna004_130bps_hac@v5.1.0"
+#how many threads are needed for basecalling
+threads: "10"
+#for basecaller modified base :
+modbase : "m6A_DRACH"
+# for basecaller batchsize:
+batchsize : "4000"
+
+# for aligner genome location:
+genome: "mm39_fasta/Mus_musculus.GRCm39.cdna.all.fa"
+genome_fai: "mm39_fasta/Mus_musculus.GRCm39.cdna.all.fa.fai"
+extract_region: "chr20"
+
+# directories
+workdirection : "/vol/spacex/nanopore/test_pipeline/final"
+resultdirectory: "results"
+end: "s" 
