@@ -1,0 +1,35 @@
+host: sorewildebeest-8dd5d
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 24
+Rules claiming more threads will be scaled down.
+Job stats:
+job                  count
+-----------------  -------
+align                    4
+all                      1
+summarize_aligner        4
+total                    9
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Wed May  7 14:56:51 2025]
+localrule align:
+    input: /vol/spacex/nanopore/test_pipeline/f/mm39_fasta/Mus_musculus.GRCm39.cdna.all.fa, /vol/spacex/nanopore/test_pipeline/f/itbs1/basecalled.bam
+    output: /vol/spacex/nanopore/test_pipeline/f/itbs1/aligned/aligned.bam
+    log: /vol/spacex/nanopore/test_pipeline/f/itbs1/log/aligned.log
+    jobid: 9
+    reason: Missing output files: /vol/spacex/nanopore/test_pipeline/f/itbs1/aligned/aligned.bam
+    wildcards: output_dir=/vol/spacex/nanopore/test_pipeline/f, name=itbs, replicate=1
+    resources: tmpdir=/tmp
+
+Waiting at most 5 seconds for missing files.
+MissingOutputException in rule align in file /vol/spacex/nanopore/test_pipeline/f/workflow/rules/aligner.py, line 2:
+Job 9  completed successfully, but some output files are missing. Missing files after 5 seconds. This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait:
+/vol/spacex/nanopore/test_pipeline/f/itbs1/aligned/aligned.bam (missing locally, parent dir contents: basecalled.bam, basecalled.bam.bai, alignment_summary.txt)
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2025-05-07T145651.943743.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

@@ -1,0 +1,42 @@
+host: sorewildebeest-8dd5d
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 24
+Rules claiming more threads will be scaled down.
+Job stats:
+job             count
+------------  -------
+all                 1
+call_to_base        4
+total               5
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Wed May  7 14:12:57 2025]
+localrule call_to_base:
+    input: /vol/spacex/nanopore/test_pipeline/final/pod5/sham1
+    output: /vol/spacex/nanopore/test_pipeline/f/sham1/basecalled.bam
+    log: /vol/spacex/nanopore/test_pipeline/f/sham1/log/basecalled.log
+    jobid: 3
+    reason: Missing output files: /vol/spacex/nanopore/test_pipeline/f/sham1/basecalled.bam
+    wildcards: output_dir=/vol/spacex/nanopore/test_pipeline/f, name=sham, replicate=1
+    resources: tmpdir=/tmp, reparation_instances=1
+
+[Wed May  7 14:13:05 2025]
+Error in rule call_to_base:
+    jobid: 3
+    input: /vol/spacex/nanopore/test_pipeline/final/pod5/sham1
+    output: /vol/spacex/nanopore/test_pipeline/f/sham1/basecalled.bam
+    log: /vol/spacex/nanopore/test_pipeline/f/sham1/log/basecalled.log (check log file(s) for error details)
+    shell:
+        dorado basecaller rna004_130bps_hac@v5.1.0 /vol/spacex/nanopore/test_pipeline/final/pod5/sham1 --modified-bases m6A_DRACH --batchsize 4000 > /vol/spacex/nanopore/test_pipeline/f/sham1/basecalled.bam  2> /vol/spacex/nanopore/test_pipeline/f/sham1/log/basecalled.log
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job call_to_base since they might be corrupted:
+/vol/spacex/nanopore/test_pipeline/f/sham1/basecalled.bam
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2025-05-07T141256.515716.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

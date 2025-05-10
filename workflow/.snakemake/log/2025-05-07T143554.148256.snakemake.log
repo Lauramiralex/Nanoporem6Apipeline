@@ -1,0 +1,14 @@
+host: sorewildebeest-8dd5d
+Building DAG of jobs...
+MissingInputException in rule all in file /vol/spacex/nanopore/test_pipeline/f/workflow/file.py, line 30:
+Missing input files for rule all:
+    output: 2025-05-07_14-35-54_final_marker_align.done
+    affected files:
+        /vol/spacex/nanopore/test_pipeline/f/sham1/aligned.bam
+        /vol/spacex/nanopore/test_pipeline/f/itbs2/aligned.bam
+        /vol/spacex/nanopore/test_pipeline/f/itbs1/aligned.bam
+        /vol/spacex/nanopore/test_pipeline/f/itbs2/summary/aligner_summary.tsv
+        /vol/spacex/nanopore/test_pipeline/f/sham1/summary/aligner_summary.tsv
+        /vol/spacex/nanopore/test_pipeline/f/sham2/aligned.bam
+        /vol/spacex/nanopore/test_pipeline/f/itbs1/summary/aligner_summary.tsv
+        /vol/spacex/nanopore/test_pipeline/f/sham2/summary/aligner_summary.tsv

@@ -1,0 +1,17 @@
+host: sorewildebeest-8dd5d
+Building DAG of jobs...
+File path /vol/spacex/nanopore/test_pipeline/f//itbs1/basecalled.bam contains double '/'. This is likely unintended. It can also lead to inconsistent results of the file-matching approach used by Snakemake.
+File path /vol/spacex/nanopore/test_pipeline/f//itbs2/basecalled.bam contains double '/'. This is likely unintended. It can also lead to inconsistent results of the file-matching approach used by Snakemake.
+File path /vol/spacex/nanopore/test_pipeline/f//sham1/basecalled.bam contains double '/'. This is likely unintended. It can also lead to inconsistent results of the file-matching approach used by Snakemake.
+File path /vol/spacex/nanopore/test_pipeline/f//sham2/basecalled.bam contains double '/'. This is likely unintended. It can also lead to inconsistent results of the file-matching approach used by Snakemake.
+InputFunctionException in rule call_to_base in file /vol/spacex/nanopore/test_pipeline/f/workflow/file.py, line 42:
+Error:
+  KeyError: 'filePath'
+Wildcards:
+  output_dir=/vol/spacex/nanopore/test_pipeline/f/
+  name=itbs
+  replicate=1
+Traceback:
+  File "/vol/spacex/nanopore/test_pipeline/f/workflow/rules/common.py", line 3, in get_input_files
+  File "/vol/spacex/miniconda3/envs/laurasenv/lib/python3.12/site-packages/pandas/core/frame.py", line 4102, in __getitem__
+  File "/vol/spacex/miniconda3/envs/laurasenv/lib/python3.12/site-packages/pandas/core/indexes/base.py", line 3812, in get_loc (rule call_to_base, line 61, /vol/spacex/nanopore/test_pipeline/f/workflow/file.py)

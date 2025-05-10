@@ -1,0 +1,91 @@
+host: sorewildebeest-8dd5d
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 24
+Rules claiming more threads will be scaled down.
+Job stats:
+job             count
+------------  -------
+all                 1
+call_to_base        4
+total               5
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Wed May  7 14:18:02 2025]
+localrule call_to_base:
+    input: /vol/spacex/nanopore/test_pipeline/final/pod5/sham1
+    output: /vol/spacex/nanopore/test_pipeline/f/sham1/basecalled.bam
+    log: /vol/spacex/nanopore/test_pipeline/f/sham1/log/basecalled.log
+    jobid: 3
+    reason: Missing output files: /vol/spacex/nanopore/test_pipeline/f/sham1/basecalled.bam
+    wildcards: output_dir=/vol/spacex/nanopore/test_pipeline/f, name=sham, replicate=1
+    resources: tmpdir=/tmp, reparation_instances=1
+
+[Wed May  7 14:18:40 2025]
+Finished job 3.
+1 of 5 steps (20%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Wed May  7 14:18:40 2025]
+localrule call_to_base:
+    input: /vol/spacex/nanopore/test_pipeline/final/pod5/itbs1
+    output: /vol/spacex/nanopore/test_pipeline/f/itbs1/basecalled.bam
+    log: /vol/spacex/nanopore/test_pipeline/f/itbs1/log/basecalled.log
+    jobid: 1
+    reason: Missing output files: /vol/spacex/nanopore/test_pipeline/f/itbs1/basecalled.bam
+    wildcards: output_dir=/vol/spacex/nanopore/test_pipeline/f, name=itbs, replicate=1
+    resources: tmpdir=/tmp, reparation_instances=1
+
+[Wed May  7 14:19:35 2025]
+Finished job 1.
+2 of 5 steps (40%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Wed May  7 14:19:35 2025]
+localrule call_to_base:
+    input: /vol/spacex/nanopore/test_pipeline/final/pod5/sham2
+    output: /vol/spacex/nanopore/test_pipeline/f/sham2/basecalled.bam
+    log: /vol/spacex/nanopore/test_pipeline/f/sham2/log/basecalled.log
+    jobid: 4
+    reason: Missing output files: /vol/spacex/nanopore/test_pipeline/f/sham2/basecalled.bam
+    wildcards: output_dir=/vol/spacex/nanopore/test_pipeline/f, name=sham, replicate=2
+    resources: tmpdir=/tmp, reparation_instances=1
+
+[Wed May  7 14:20:10 2025]
+Finished job 4.
+3 of 5 steps (60%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Wed May  7 14:20:10 2025]
+localrule call_to_base:
+    input: /vol/spacex/nanopore/test_pipeline/final/pod5/itbs2
+    output: /vol/spacex/nanopore/test_pipeline/f/itbs2/basecalled.bam
+    log: /vol/spacex/nanopore/test_pipeline/f/itbs2/log/basecalled.log
+    jobid: 2
+    reason: Missing output files: /vol/spacex/nanopore/test_pipeline/f/itbs2/basecalled.bam
+    wildcards: output_dir=/vol/spacex/nanopore/test_pipeline/f, name=itbs, replicate=2
+    resources: tmpdir=/tmp, reparation_instances=1
+
+[Wed May  7 14:20:45 2025]
+Finished job 2.
+4 of 5 steps (80%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Wed May  7 14:20:45 2025]
+localrule all:
+    input: /vol/spacex/nanopore/test_pipeline/f/itbs1/basecalled.bam, /vol/spacex/nanopore/test_pipeline/f/itbs2/basecalled.bam, /vol/spacex/nanopore/test_pipeline/f/sham1/basecalled.bam, /vol/spacex/nanopore/test_pipeline/f/sham2/basecalled.bam
+    output: 2025-05-07_14-18-02_final_marker_align.done
+    jobid: 0
+    reason: Missing output files: 2025-05-07_14-18-02_final_marker_align.done; Input files updated by another job: /vol/spacex/nanopore/test_pipeline/f/itbs2/basecalled.bam, /vol/spacex/nanopore/test_pipeline/f/sham2/basecalled.bam, /vol/spacex/nanopore/test_pipeline/f/itbs1/basecalled.bam, /vol/spacex/nanopore/test_pipeline/f/sham1/basecalled.bam
+    resources: tmpdir=/tmp
+
+[Wed May  7 14:20:45 2025]
+Finished job 0.
+5 of 5 steps (100%) done
+Complete log: .snakemake/log/2025-05-07T141802.897786.snakemake.log

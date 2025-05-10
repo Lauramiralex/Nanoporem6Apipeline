@@ -1,0 +1,17 @@
+/vol/spacex/nanopore/test_pipeline/f/sham2/pileup/pileup.bed
+/vol/spacex/nanopore/test_pipeline/f/itbs2/aligned/sorted.bam
+/vol/spacex/nanopore/test_pipeline/f/itbs2/summary/summary_reads.txt
+/vol/spacex/nanopore/test_pipeline/f/itbs1/aligned/indexed.bam.bai
+/vol/spacex/nanopore/test_pipeline/f/sham1/aligned/indexed.bam.bai
+/vol/spacex/nanopore/test_pipeline/f/sham1/pileup/pileup.bed
+/vol/spacex/nanopore/test_pipeline/f/sham1/aligned/sorted.bam
+/vol/spacex/nanopore/test_pipeline/f/sham2/aligned/indexed.bam.bai
+/vol/spacex/nanopore/test_pipeline/f/sham2/summary/summary_reads.txt
+/vol/spacex/nanopore/test_pipeline/f/itbs2/pileup/pileup.bed
+2025-05-07_15-09-03_final_marker_align.done
+/vol/spacex/nanopore/test_pipeline/f/sham2/aligned/sorted.bam
+/vol/spacex/nanopore/test_pipeline/f/itbs2/aligned/indexed.bam.bai
+/vol/spacex/nanopore/test_pipeline/f/sham1/summary/summary_reads.txt
+/vol/spacex/nanopore/test_pipeline/f/itbs1/summary/summary_reads.txt
+/vol/spacex/nanopore/test_pipeline/f/itbs1/pileup/pileup.bed
+/vol/spacex/nanopore/test_pipeline/f/itbs1/aligned/sorted.bam

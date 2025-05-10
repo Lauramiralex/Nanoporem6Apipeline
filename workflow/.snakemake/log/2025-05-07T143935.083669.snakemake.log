@@ -1,0 +1,40 @@
+host: sorewildebeest-8dd5d
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 24
+Rules claiming more threads will be scaled down.
+Job stats:
+job                  count
+-----------------  -------
+align                    4
+all                      1
+summarize_aligner        4
+total                    9
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Wed May  7 14:39:35 2025]
+localrule align:
+    input: /vol/spacex/nanopore/test_pipeline/f/mm39_fasta/Mus_musculus.GRCm39.cdna.all.fa, /vol/spacex/nanopore/test_pipeline/f/itbs1/basecalled.bam
+    output: /vol/spacex/nanopore/test_pipeline/f/itbs1/aligned.bam
+    log: /vol/spacex/nanopore/test_pipeline/f/itbs1/log/aligned.log
+    jobid: 9
+    reason: Missing output files: /vol/spacex/nanopore/test_pipeline/f/itbs1/aligned.bam
+    wildcards: output_dir=/vol/spacex/nanopore/test_pipeline/f, name=itbs, replicate=1
+    resources: tmpdir=/tmp
+
+ImproperOutputException in rule align in file /vol/spacex/nanopore/test_pipeline/f/workflow/rules/aligner.py, line 2:
+Outputs of incorrect type (directories when expecting files or vice versa). Output directories must be flagged with directory(). for rule align:
+    output: /vol/spacex/nanopore/test_pipeline/f/itbs1/aligned.bam
+    wildcards: output_dir=/vol/spacex/nanopore/test_pipeline/f, name=itbs, replicate=1
+    affected files:
+        /vol/spacex/nanopore/test_pipeline/f/itbs1/aligned.bam
+Removing output files of failed job align since they might be corrupted:
+/vol/spacex/nanopore/test_pipeline/f/itbs1/aligned.bam
+Skipped removing non-empty directory /vol/spacex/nanopore/test_pipeline/f/itbs1/aligned.bam
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2025-05-07T143935.083669.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

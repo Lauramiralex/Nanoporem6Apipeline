@@ -1,0 +1,43 @@
+host: sorewildebeest-8dd5d
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 24
+Rules claiming more threads will be scaled down.
+Job stats:
+job                  count
+-----------------  -------
+align                    3
+all                      1
+summarize_aligner        4
+total                    8
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Wed May  7 14:41:21 2025]
+localrule summarize_aligner:
+    input: /vol/spacex/nanopore/test_pipeline/f/itbs1/aligned.bam
+    output: /vol/spacex/nanopore/test_pipeline/f/itbs1/summary/aligner_summary.tsv
+    log: /vol/spacex/nanopore/test_pipeline/f/itbs1/log/aligner_summary.log
+    jobid: 13
+    reason: Missing output files: /vol/spacex/nanopore/test_pipeline/f/itbs1/summary/aligner_summary.tsv
+    wildcards: output_dir=/vol/spacex/nanopore/test_pipeline/f, name=itbs, replicate=1
+    resources: tmpdir=/tmp
+
+[Wed May  7 14:41:21 2025]
+Error in rule summarize_aligner:
+    jobid: 13
+    input: /vol/spacex/nanopore/test_pipeline/f/itbs1/aligned.bam
+    output: /vol/spacex/nanopore/test_pipeline/f/itbs1/summary/aligner_summary.tsv
+    log: /vol/spacex/nanopore/test_pipeline/f/itbs1/log/aligner_summary.log (check log file(s) for error details)
+    shell:
+        dorado summary /vol/spacex/nanopore/test_pipeline/f/itbs1/aligned.bam > /vol/spacex/nanopore/test_pipeline/f/itbs1/summary/aligner_summary.tsv
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job summarize_aligner since they might be corrupted:
+/vol/spacex/nanopore/test_pipeline/f/itbs1/summary/aligner_summary.tsv
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2025-05-07T144121.057986.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

@@ -1,0 +1,26 @@
+host: sorewildebeest-8dd5d
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 24
+Rules claiming more threads will be scaled down.
+Job stats:
+job      count
+-----  -------
+all          1
+total        1
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Wed May  7 15:08:48 2025]
+localrule all:
+    input: /vol/spacex/nanopore/test_pipeline/f/itbs1/basecalled.bam, /vol/spacex/nanopore/test_pipeline/f/itbs2/basecalled.bam, /vol/spacex/nanopore/test_pipeline/f/sham1/basecalled.bam, /vol/spacex/nanopore/test_pipeline/f/sham2/basecalled.bam, /vol/spacex/nanopore/test_pipeline/f/itbs1/summary/basecaller_summary.tsv, /vol/spacex/nanopore/test_pipeline/f/itbs2/summary/basecaller_summary.tsv, /vol/spacex/nanopore/test_pipeline/f/sham1/summary/basecaller_summary.tsv, /vol/spacex/nanopore/test_pipeline/f/sham2/summary/basecaller_summary.tsv, /vol/spacex/nanopore/test_pipeline/f/itbs1/aligned/basecalled.bam, /vol/spacex/nanopore/test_pipeline/f/itbs2/aligned/basecalled.bam, /vol/spacex/nanopore/test_pipeline/f/sham1/aligned/basecalled.bam, /vol/spacex/nanopore/test_pipeline/f/sham2/aligned/basecalled.bam, /vol/spacex/nanopore/test_pipeline/f/itbs1/summary/aligner_summary.tsv, /vol/spacex/nanopore/test_pipeline/f/itbs2/summary/aligner_summary.tsv, /vol/spacex/nanopore/test_pipeline/f/sham1/summary/aligner_summary.tsv, /vol/spacex/nanopore/test_pipeline/f/sham2/summary/aligner_summary.tsv
+    output: 2025-05-07_15-08-48_final_marker_align.done
+    jobid: 0
+    reason: Missing output files: 2025-05-07_15-08-48_final_marker_align.done
+    resources: tmpdir=/tmp
+
+[Wed May  7 15:08:48 2025]
+Finished job 0.
+1 of 1 steps (100%) done
+Complete log: .snakemake/log/2025-05-07T150848.951287.snakemake.log

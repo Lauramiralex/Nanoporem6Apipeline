@@ -1,0 +1,9 @@
+name: snake_environment
+channels:
+  - conda-forge
+  - bioconda
+dependencies: 
+  - snakemake 
+  - dorado 
+  - pandas  
+  - numpy
