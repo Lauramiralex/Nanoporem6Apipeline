@@ -1,0 +1,13 @@
+# Ignoriere alle Dateien, die mit ._ beginnen (typisch für macOS)
+._*
+
+# Ignoriere macOS-Systemdateien
+.DS_Store
+
+# Ignoriere alle .log-Dateien
+*.log
+
+# Ignoriere alle .tmp-Dateien
+*.tmp
+
+
