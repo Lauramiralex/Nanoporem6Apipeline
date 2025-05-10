@@ -1,10 +1,8 @@
 # no customizing required
 samples: "config/samples.tsv"
+
+#please update where the results shall be safed
 output_dir: "/vol/spacex/nanopore/test_pipeline/f"
-#allfiles: "config/allfiles.tsv"
-#experiments: "config/sample_sheet.tsv"
-#controlgroup: "config/sample_sheet.tsv"
-#path: "config/allfiles.tsv"
 
 #please update with exact modelname and its path in case a new model is used
 basecall_model: "/vol/spacex/nanopore/test_pipeline/f/rna004_130bps_hac@v5.1.0"
@@ -19,8 +17,3 @@ batchsize : "4000"
 genome: "/vol/spacex/nanopore/test_pipeline/f/mm39_fasta/Mus_musculus.GRCm39.cdna.all.fa"
 genome_fai: "/vol/spacex/nanopore/test_pipeline/f/mm39_fasta/Mus_musculus.GRCm39.cdna.all.fa.fai"
 extract_region: "chr20"
-
-# directories
-workdirection : "/vol/spacex/nanopore/test_pipeline/final"
-resultdirectory: "results"
-end: "s" 
