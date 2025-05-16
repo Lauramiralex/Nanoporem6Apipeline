@@ -3,33 +3,25 @@ def get_input_files(wildcards):
         return row["filepath"].iloc[0]
 
 def get_path_pairs_exp(samples):
-    pairs = []
-    first_paths= []
+    treated_paths= []
     grouped = samples.groupby("replicate")
 
     for rep, group in grouped:
-        name = group["name"].tolist()
-        paths = group["filepath"].tolist()
-        
-        if len(name) != 2:
-            raise ValueError(f"Replicate {rep} has {len(name)} conditions (expected 2).")
+        treated_rows = group[group["group"] == "treated"]
+        paths = treated_rows["filepath"].tolist()
+        name = treated_rows["name"].values[0]
+        treated_paths.append("{output_dir}/"+ name +"{replicate}/pileup/pileup.bed.gz")
 
-        first_paths.append("{output_dir}/"+ name[0] +"{replicate}/pileup/pileup.bed.gz")
-
-    return first_paths
+    return treated_paths
 
 def get_path_pairs_contr(samples):
-    pairs = []
-    second_paths= []
+    control_paths= []
     grouped = samples.groupby("replicate")
 
     for rep, group in grouped:
-        name = group["name"].tolist()
-        paths = group["filepath"].tolist()
-        
-        if len(name) != 2:
-            raise ValueError(f"Replicate {rep} has {len(name)} conditions (expected 2).")
+        control_rows = group[group["group"] == "control"]
+        paths = control_rows["filepath"].tolist()
+        name = control_rows["name"].values[0]
+        control_paths.append("{output_dir}/"+ name +"{replicate}/pileup/pileup.bed.gz")
 
-        second_paths.append("{output_dir}/"+ name[0] +"{replicate}/pileup/pileup.bed.gz")
-
-    return second_paths
+    return control_paths
