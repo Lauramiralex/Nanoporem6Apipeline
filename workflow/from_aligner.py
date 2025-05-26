@@ -27,6 +27,7 @@ timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 include: "rules/common.py"
 include: "rules/aligner.py"
 include: "rules/pileup.py"
+include: "rules/tbi.py"
 include: "rules/dmr.py"
 
 rule all:
@@ -40,8 +41,6 @@ rule all:
         expand("{output_dir}/{name}{replicate}/pileup/extracted.tsv",zip, name=samples["name"],replicate= samples["replicate"],output_dir=[config["output_dir"]] * len(samples)),
         expand("{output_dir}/{name}{replicate}/pileup/pileup.bed.gz",zip, name=samples["name"],replicate= samples["replicate"],output_dir=[config["output_dir"]] * len(samples)),
         expand("{output_dir}/{name}{replicate}/pileup/pileup.bed.gz.tbi",zip, name=samples["name"],replicate= samples["replicate"],output_dir=[config["output_dir"]] * len(samples)),
-        expand("{output_dir}/{name}{replicate}/pileup/extracted.tsv",zip, name=samples["name"],replicate= samples["replicate"],output_dir=[config["output_dir"]] * len(samples)),
-        expand("{output_dir}/{name}{replicate}/pileup/extracted.tsv",zip, name=samples["name"],replicate= samples["replicate"],output_dir=[config["output_dir"]] * len(samples)),
         expand("{output_dir}/{name}{replicate}/dmr/{name}{replicate}_dmr.txt",zip, name=samples["name"],replicate= samples["replicate"],output_dir=[config["output_dir"]] * len(samples)),
         expand("{output_dir}/{name}{replicate}/pileup/extracted.tsv",zip, name=samples["name"],replicate= samples["replicate"],output_dir=[config["output_dir"]] * len(samples)),
         expand("{output_dir}/{name}{replicate}/pileup/pileup.bed.gz",zip, name=samples["name"],replicate= samples["replicate"],output_dir=[config["output_dir"]] * len(samples)),

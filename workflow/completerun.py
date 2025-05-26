@@ -28,6 +28,8 @@ include: "rules/common.py"
 include: "rules/basecaller.py"
 include: "rules/aligner.py"
 include: "rules/pileup.py"
+include: "rules/extract.py"
+include: "rules/tbi.py"
 include: "rules/dmr.py"
 
 rule all:

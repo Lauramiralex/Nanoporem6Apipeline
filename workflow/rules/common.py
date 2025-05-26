@@ -2,26 +2,27 @@ def get_input_files(wildcards):
         row = samples[(samples["name"] == wildcards.name) & (samples["replicate"]== int(wildcards.replicate))]
         return row["filepath"].iloc[0]
 
+
 def get_path_pairs_exp(samples):
-    treated_paths= []
-    grouped = samples.groupby("replicate")
+    treated_pairs = []
+    treated_df = samples[samples["group"] == "treated"]
+    for _, row in treated_df.iterrows():
+        replicate = row["replicate"]
+        path = "{output_dir}/" + row["name"] + str(row["replicate"]) + "/pileup/pileup.bed.gz"
+        treated_pairs.append(path)
 
-    for rep, group in grouped:
-        treated_rows = group[group["group"] == "treated"]
-        paths = treated_rows["filepath"].tolist()
-        name = treated_rows["name"].values[0]
-        treated_paths.append("{output_dir}/"+ name +"{replicate}/pileup/pileup.bed.gz")
-
-    return treated_paths
+    print(treated_pairs)
+    return treated_pairs
 
 def get_path_pairs_contr(samples):
-    control_paths= []
-    grouped = samples.groupby("replicate")
+    untreated_pairs = []
 
-    for rep, group in grouped:
-        control_rows = group[group["group"] == "control"]
-        paths = control_rows["filepath"].tolist()
-        name = control_rows["name"].values[0]
-        control_paths.append("{output_dir}/"+ name +"{replicate}/pileup/pileup.bed.gz")
+    untreated_df = samples[samples["group"] == "control"]
+    for _, row in untreated_df.iterrows():
+        replicate = row["replicate"]
+        path = "{output_dir}/" + row["name"] + str(row["replicate"]) + "/pileup/pileup.bed.gz"
+        untreated_pairs.append(path)
+    print(untreated_pairs)
+    return untreated_pairs
 
-    return control_paths
+
