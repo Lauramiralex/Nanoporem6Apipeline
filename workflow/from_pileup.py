@@ -7,6 +7,9 @@ import datetime
 configfile: "config/config.yaml"
 
 samples = pd.read_csv(config["samples"], sep="\t", header=0)
+exp_names = get_exp_names("config/samples.tsv")
+contr_names = get_contr_names("config/samples.tsv")
+
 
 samples.sort_values(
     by=["name", "replicate", "filepath"],
@@ -39,7 +42,7 @@ rule all:
         expand("{output_dir}/{name}{replicate}/pileup/pileup.bed",zip, name=samples["name"],replicate= samples["replicate"],output_dir=[config["output_dir"]] * len(samples)),
         expand("{output_dir}/{name}{replicate}/pileup/pileup.bed.gz",zip, name=samples["name"],replicate= samples["replicate"],output_dir=[config["output_dir"]] * len(samples)),
         expand("{output_dir}/{name}{replicate}/pileup/pileup.bed.gz.tbi",zip, name=samples["name"],replicate= samples["replicate"],output_dir=[config["output_dir"]] * len(samples)),
-        expand("{output_dir}/{name}{replicate}/dmr/{name}{replicate}_dmr.txt",zip, name=samples["name"],replicate= samples["replicate"],output_dir=[config["output_dir"]] * len(samples)),
+        expand("{output_dir}/results/{dest}{contr}_dmr.txt",zip, dest = exp_names, contr = contr_names, output_dir=[config["output_dir"]] * len(exp_names)),
         expand("{output_dir}/{name}{replicate}/pileup/extracted.tsv",zip, name=samples["name"],replicate= samples["replicate"],output_dir=[config["output_dir"]] * len(samples)),
         expand("{output_dir}/{name}{replicate}/pileup/pileup.bed.gz",zip, name=samples["name"],replicate= samples["replicate"],output_dir=[config["output_dir"]] * len(samples)),
         expand("{output_dir}/{name}{replicate}/pileup/pileup.bed.gz.tbi",zip, name=samples["name"],replicate= samples["replicate"],output_dir=[config["output_dir"]] * len(samples))

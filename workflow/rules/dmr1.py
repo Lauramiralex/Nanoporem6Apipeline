@@ -1,16 +1,15 @@
 rule dmr:
     input:
-        exp =  get_path_pairs_exp("config/samples.tsv"),
-        contr  = get_path_pairs_contr("config/samples.tsv"),
-        #dest = get_exp_names("config/samples.tsv"),
+        exp =  lambda wildcards:get_path_pairs_exp(samples),
+        contr  = lambda wildcards:get_path_pairs_contr(samples),
         ref= config["genome"],
         reg= config["genome_fai"]
     output:
-        "{output_dir}/results/{dest}{contr}_dmr.txt"
+        "{output_dir}/{name}{replicate}/dmr/{name}{replicate}_dmr.txt"
     conda:
         "../envs/environment_adv.yml"
     log:
-        "{output_dir}/{dest}/log/{dest}{contr}_dmr.log"
+        "{output_dir}/{name}{replicate}/log/{name}{replicate}_dmr.log"
     params:
         control_args= lambda wildcards, input: " ".join(f"-a {c}" for c in input.contr),
         experiment_args= lambda wildcards, input: " ".join(f"-b {e}" for e in input.exp)
