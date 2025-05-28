@@ -12,8 +12,6 @@ def get_path_pairs_exp(tsv_path):
     for _, row in treated_df.iterrows():
         path = "{output_dir}/" + row["name"] + str(row["replicate"]) + "/pileup/pileup.bed.gz"
         treated_pairs.append(path)
-
-    print(treated_pairs)
     return treated_pairs
 
 
@@ -25,7 +23,5 @@ def get_path_pairs_contr(tsv_path):
     for _, row in untreated_df.iterrows():
         path = "{output_dir}/" + row["name"] + str(row["replicate"]) + "/pileup/pileup.bed.gz"
         untreated_pairs.append(path)
-
-    print(untreated_pairs)
     return untreated_pairs
 

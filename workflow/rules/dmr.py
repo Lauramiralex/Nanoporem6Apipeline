@@ -2,7 +2,6 @@ rule dmr:
     input:
         exp =  get_path_pairs_exp("config/samples.tsv"),
         contr  = get_path_pairs_contr("config/samples.tsv"),
-        #dest = get_exp_names("config/samples.tsv"),
         ref= config["genome"],
         reg= config["genome_fai"]
     output:

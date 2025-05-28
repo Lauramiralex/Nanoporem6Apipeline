@@ -26,7 +26,8 @@ timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
 rule all:
     input:
-        expand("{output_dir}/results/dmr_out.txt",zip, output_dir=[config["output_dir"]])
+        f"{config["output_dir"]}/results/dmr_out.txt"
+        #expand("{output_dir}/results/dmr_out.txt",zip, output_dir=[config["output_dir"]])
     output:
         f"{timestamp}_final_marker_align.done"  
     shell:
