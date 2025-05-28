@@ -1,4 +1,0 @@
-host: sorewildebeest-8dd5d
-Building DAG of jobs...
-PeriodicWildcardError in rule align in file /vol/spacex/nanopore/test_pipeline/f/workflow/rules/aligner.py, line 2:
-The value /basecalled.bam in wildcard output_dir is periodically repeated (/vol/spacex/nanopore/test_pipeline/f/itbs1/aligned.bam/basecalled.bam/basecalled.bam/basecalled.bam/basecalled.bam/basecalled.bam/basecalled.bam/basecalled.bam/basecalled.bam/basecalled.bam/basecalled.bam/basecalled.bam/basecalled.bam/basecalled.bam/basecalled.bam/basecalled.bam/basecalled.bam/basecalled.bam/basecalled.bam/basecalled.bam/basecalled.bam). This would lead to an infinite recursion. To avoid this, e.g. restrict the wildcards in this rule to certain values.

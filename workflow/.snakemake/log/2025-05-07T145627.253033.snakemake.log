@@ -1,8 +1,0 @@
-host: sorewildebeest-8dd5d
-Building DAG of jobs...
-MissingInputException in rule summarize_aligner in file /vol/spacex/nanopore/test_pipeline/f/workflow/rules/aligner.py, line 14:
-Missing input files for rule summarize_aligner:
-    output: /vol/spacex/nanopore/test_pipeline/f/itbs1/summary/aligner_summary.tsv
-    wildcards: output_dir=/vol/spacex/nanopore/test_pipeline/f, name=itbs, replicate=1
-    affected files:
-        /vol/spacex/nanopore/test_pipeline/f/itbs1/aligned.bam
