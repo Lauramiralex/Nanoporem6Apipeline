@@ -6,9 +6,14 @@ import datetime
 
 configfile: "config/config.yaml"
 
+include: "rules/common.py"
+include: "rules/basecaller.py"
+include: "rules/aligner.py"
+include: "rules/pileup.py"
+include: "rules/tbi.py"
+include: "rules/dmr.py"
+
 samples = pd.read_csv(config["samples"], sep="\t", header=0)
-exp_names = get_exp_names("config/samples.tsv")
-contr_names = get_contr_names("config/samples.tsv")
 
 samples.sort_values(
     by=["name", "replicate", "filepath"],
@@ -26,13 +31,7 @@ base = config["modbase"]
 batchsize = config["batchsize"]
 timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
-include: "rules/common.py"
-include: "rules/basecaller.py"
-include: "rules/aligner.py"
-include: "rules/pileup.py"
-include: "rules/extract.py"
-include: "rules/tbi.py"
-include: "rules/dmr.py"
+
 
 rule all:
     input:
@@ -44,11 +43,9 @@ rule all:
         expand("{output_dir}/{name}{replicate}/summary/summary_reads.txt",zip, name=samples["name"],replicate= samples["replicate"],output_dir=[config["output_dir"]] * len(samples)),
         expand("{output_dir}/{name}{replicate}/aligned/indexed.bam.bai",zip, name=samples["name"],replicate= samples["replicate"],output_dir=[config["output_dir"]] * len(samples)),   
         expand("{output_dir}/{name}{replicate}/pileup/pileup.bed",zip, name=samples["name"],replicate= samples["replicate"],output_dir=[config["output_dir"]] * len(samples)),
-        expand("{output_dir}/{name}{replicate}/pileup/extracted.tsv",zip, name=samples["name"],replicate= samples["replicate"],output_dir=[config["output_dir"]] * len(samples)),
         expand("{output_dir}/{name}{replicate}/pileup/pileup.bed.gz",zip, name=samples["name"],replicate= samples["replicate"],output_dir=[config["output_dir"]] * len(samples)),
         expand("{output_dir}/{name}{replicate}/pileup/pileup.bed.gz.tbi",zip, name=samples["name"],replicate= samples["replicate"],output_dir=[config["output_dir"]] * len(samples)),
-        expand("{output_dir}/results/{dest}{contr}_dmr.txt",zip, dest = exp_names, contr = contr_names, output_dir=[config["output_dir"]] * len(exp_names)),
-        expand("{output_dir}/{name}{replicate}/pileup/extracted.tsv",zip, name=samples["name"],replicate= samples["replicate"],output_dir=[config["output_dir"]] * len(samples))
+        expand("{output_dir}/results/dmr_out.txt",zip, output_dir=[config["output_dir"]])
     output:
         f"{timestamp}_final_marker_align.done"  
     shell:

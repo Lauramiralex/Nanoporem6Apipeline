@@ -6,11 +6,11 @@ rule dmr:
         ref= config["genome"],
         reg= config["genome_fai"]
     output:
-        "{output_dir}/results/{dest}{contr}_dmr.txt"
+        "{output_dir}/results/dmr_out.txt"
     conda:
         "../envs/environment_adv.yml"
     log:
-        "{output_dir}/{dest}/log/{dest}{contr}_dmr.log"
+        "{output_dir}/results/log/dmr_out.log"
     params:
         control_args= lambda wildcards, input: " ".join(f"-a {c}" for c in input.contr),
         experiment_args= lambda wildcards, input: " ".join(f"-b {e}" for e in input.exp)

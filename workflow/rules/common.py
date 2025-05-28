@@ -29,26 +29,3 @@ def get_path_pairs_contr(tsv_path):
     print(untreated_pairs)
     return untreated_pairs
 
-def get_exp_names(tsv_path):
-    treated_name_pairs = []
-    samples = pandas.read_csv(tsv_path, sep="\t")
-    treated_df = samples[samples["group"] == "treated"]
-
-    for _, row in treated_df.iterrows():
-        name = row["name"] + str(row["replicate"])
-        treated_name_pairs.append(name)
-
-    print(treated_name_pairs)
-    return treated_name_pairs
-
-def get_contr_names(tsv_path):
-    untreated_name_pairs = []
-    samples = pandas.read_csv(tsv_path, sep="\t")
-    untreated_df = samples[samples["group"] == "control"]
-
-    for _, row in untreated_df.iterrows():
-        name = row["name"] + str(row["replicate"])
-        untreated_name_pairs.append(name)
-
-    print(untreated_name_pairs)
-    return untreated_name_pairs
