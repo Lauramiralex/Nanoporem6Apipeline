@@ -11,7 +11,7 @@ threads: "10"
 #for basecaller modified base :
 modbase : "m6A_DRACH"
 # for basecaller batchsize:
-batchsize : "4000"
+batchsize : "0"
 
 # for aligner genome location:
 genome: "/vol/spacex/nanopore/test_pipeline/f/mm39_fasta/Mus_musculus.GRCm39.cdna.all.fa"
