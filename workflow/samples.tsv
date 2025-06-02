@@ -1,5 +1,0 @@
-name	replicate	filepath
-itbs	1	/vol/spacex/nanopore/test_pipeline/final/pod5/itbs1
-itbs	2	/vol/spacex/nanopore/test_pipeline/final/pod5/itbs2
-sham	1	/vol/spacex/nanopore/test_pipeline/final/pod5/sham1
-sham	2	/vol/spacex/nanopore/test_pipeline/final/pod5/sham2
