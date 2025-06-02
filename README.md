@@ -22,7 +22,7 @@ This simplifies the experimental workflow and enables to preserve the biological
 
 ## m6A
 
-m6A is a chemical modification in which a methyl group is added to the nitrogen at position 6 of adenosine. It is the most abundant internat modification found in messenger RNA and long non-coding RNA in eukaryotic cells. m6A is typically found in conserved sequence motifs and is frequently enriched near stop codons, within long exons and in 3' untranslated regions. Its writer mark is deposited by a methyltransferase complex and it can be removed by demethylases such as FTO. Specialized m6A-binding proteins recognize and interprete this mark to influence downstream RNA metabolism.
+m6A is a chemical modification in which a methyl group is added to the nitrogen at position 6 of adenosine. It is the most abundant internal modification found in messenger RNA and long non-coding RNA in eukaryotic cells. m6A is typically found in conserved sequence motifs and is frequently enriched near stop codons, within long exons and in 3' untranslated regions. Its writer mark is deposited by a methyltransferase complex and it can be removed by demethylases such as FTO. Specialized m6A-binding proteins recognize and interprete this mark to influence downstream RNA metabolism.
 Functinally, m6A plays a central role in post-transcriptional gene regulation influencing critical processes such as mRNA stability, translation efficiency and RNA splicing. Changes in its patterns have been associated with cancer, viral infections and neurological disorders.
 
 
@@ -97,7 +97,7 @@ Bgzip is a version of gzip optimized for handling large files.
 Tabix is a tool for indexing compressed files, especially useful with VCF and GFF files.  
 Install Bgzip and Tabix in terminal:  
 ```
-conda install -c bioconda bgzip
+conda install -c conda-forge bgzip
 conda install -c bioconda tabix
 ```  
 ## Verify Installation
@@ -111,38 +111,29 @@ tabix --version
 If these commands return version numbers, the tools have been installed successfully.  
 
 # Setup Instructions for Usage
-To successfully run the scripts in this repository, follow the steps below to set up the required folder structure and input files.  
+To successfully run the scripts in this repository, follow the steps below to modify the configurationscript.  
 
 ## 1. Setup Working Structure
 Before running the script, the following structure should be in place:  
-   - The script and the config folder(download from repository) have to be in the same directory   
+   - The workflow folder and the config folder (download from repository) have to be in the same directory   
    
-## 2. Organizing Input Files
-The script requires POD5 files to function correctly. Follow these rules when organizing them:      
-   - Ensure that the folder containing the POD5 files is uniquely named according to the experiment      name.   
-## 3. Customizing Config File
-In your config file you will find different contents which need customization:     
-   - config.yaml :
-        - provide the **workdirectory** under "workdirection", from the workdirectory it is                       critical to be able to access all further needed folders from chosen directory.   
-        **This will be the start of all further provided paths**   
-        - provide the desired **resultdirectory** in which all results will be accessible.   
-          The result directorys path needs to be provided starting by workdirectory.   
-        **example: workdirectory : "/vol/spacex/nanopore" which lies before result directory
-              resultdirectory : "test_pipeline/final"**  
-        - provide the path for the **genome fasta and genome.fai**  
-        - provide the path and modelname of used **basecall_model**  
-            ```basecall_model: 'your_model_name_here' ```    
-  
-## 4. Configuring TSV Files
-Two TSV files inside the `config` folder need to be correctly filled:  
-### allfiles.tsv
-In the `allfiles` column, list all experiment names and control group names and their individual path starting from the workdirectory.  
-### sample_sheet.tsv
-In the `experiment` column, list all experiment names and their individual path starting from the workdirectory.  
-In the `control` column, list all control group names and their individual path starting from the workdirectory.  
+## 2. Customizing samples.tsv
+The script requires POD5 files to function correctly. Follow these rules while modifying the sample.tsv file in the config folder: 
+   - Ensure to register the name, replicate number and group of each sample. There should always be an experiment from the group "treated"
+     and a counterpart control sample from the group "control" which have the same replicate number as a way of uniquely identifying them as counterparts.  
+   - Ensure that the absolute path of each folder containing needed POD5 files is listed in the .tsv file **config/samples.tsv** under the
+     header **filepath**.
 
 #### ! important: The listed names of experiments and control groups must be identical to correlating individual pod5 files !
-
+     
+## 3. Customizing Config.yaml
+In your config.yaml you will find different contents which need customization:     
+        - provide the desired **output_dir** in which all results will be accessible.   
+          The result directorys path needs to be absolut.   
+        - provide the absolut path for the **genome fasta and genome.fai**  
+        - provide the absolut path of used **basecall_model** including the full name   
+            ```basecall_model: '/vol/spacex/nanopore/test_pipeline/rna004_130bps_hac@v5.1.0' ```    
+  
 With this setup, the script should run correctly.
 
 # How to run the script
@@ -152,38 +143,61 @@ While being in the `main folder` the command
    ```snakemake --cores all -s scriptname.py --jobs 1 ```  
 runs the desired script on the previous determined pod5  files.  
 
-In case one wants to only run a certain part, make sure that the required data is correctly named in the folders from the step bevor.  
-Run the same command with the name of the script for the required part.
+In case one wants to only run a certain part, make sure that the required data is correctly named in the folders from the step bevor.    
+Run the same command with the name of the script for the required part.  
 
 ### completerun.py
-For running `completerun.py` one needs the pod5 files in a file which path is provided in allfiles.tsv and sample_sheet.tsv.  
+For running `completerun.py` one needs the pod5 files in a file which path needs to be provided in samples.tsv.  
 The script produces data from basecalling, alignment, pileup and dmr while also providing summarys after each step.  
 The dataformats produced by this script include .bam files, .txt files, .tsv files, .bed files and .log files.
 
 ### basecaller.py
-For running `basecaller.py` one needs the pod5 files in a file which path is provided in allfiles.tsv and sample_sheet.tsv.  
+For running `basecaller.py` one needs the pod5 files in a file which path is provided in samples.tsv.  
 The script produces data from basecalling while also providing a summary.  
 The dataformats produced by this script include .bam files, .txt files, .tsv files and .log files.
 
-### aligner.py
-For running `aligner.py` one needs the pod5 files in a file which path is provided in allfiles.tsv and sample_sheet.tsv.  
-The script produces data from basecalling and alignment while also providing summarys after each step.  
+### only_aligner.py
+For running `only_aligner.py` one needs the .bam files which are produced in the basecalling step.  
+The script produces data from alignment while also providing a summary.  
 The dataformats produced by this script include .bam files,.txt files, .tsv files and .log files.
 
-### pileup.py
-For running `pileup.py` one needs the pod5 files in a file which path is provided in allfiles.tsv and sample_sheet.tsv`.  
-The script produces data from basecalling, alignment and modkit pileup while also providing summarys after each step.  
-The dataformats produced by this script include .bam files,.txt files, .bed files, .bai files, .tsv files and .log files.  
+### only_pileup.py
+For running `only_pileup.py` one needs the .bam files which are produced in the alignment step.  
+The script produces data from modkit pileup and samtools index while also providing summarys after each step.  
+The dataformats produced by this script include .bam files,.txt files, .bed files, .bai files, .tsv files and .log files. 
+
+### only_tbi.py
+For running ònly_tbi.py' one needs the .bed files which are produced in the pileup step.   
+The script produces data from bgzip and tabix and is crucial for the success of the dmr.   
+The dataformats produced by  this script include .bed.gz files and .bed.gz.tbi files.  
 
 ### only_dmr.py
-For running `only_dmr.py` one needs the sorted.bam files in a file `{path to pod5 files}/{name of experiment|control}/results/pileup/pileup.bed.gz`. This is achievable with the `aligner.py` script. 
-The script produces data from modkit extract and dmr analysis, while also providing summarys after each step.  
+For running `only_dmr.py` one needs the sorted.bam files which are produced in the tbi step. This is achievable with the `only_tbi.py` script. 
+The script produces data from dmr analysis, while also providing a summary.  
 The dataformats produced by this script include .txt files, .tsv files and .log files.  
 
-### only_align.py
-For running `only_align.py` one needs the basecalled/{}.bam files in a file called `{path to pod5 files}/{name of experiment|control}/results/basecalled/{name of experiment/control}.bam`. This is achievable with the `basecaller.py` script.  
-The script produces data from dorado aligner  while also providing a summary.  
-The dataformats produced by this script include .txt files, .bam files, .tsv files and .log files.
+### from_aligner.py
+For running `from_aligner.py` one needs the .bam files which are produced in the basecalling step. This is achievable with the `basecaller.py` script.  
+The script produces data from dorado aligner, samtools sort, samtools index, modkit pileup, bgzip, tabix and modkit dmr while also providing summarys after each step.  
+The dataformats produced by this script include .txt files, .bam files, .tsv files, .log files, .bed.gz files, .bai files and .bed.gz.tbi files.
+
+### from_pileup.py
+For running `from_pileup.py` one needs the .bam files which are produced in the alignment step. This is achievable with the `only_aligner.py` script after running the `basecaller.py`script.  
+The script produces data from samtools sort, samtools index, modkit pileup, bgzip, tabix and modkit dmr while also providing summarys after each step.  
+The dataformats produced by this script include .txt files, .bam files, .tsv files, .log files, .bed.gz files, .bai files and .bed.gz.tbi files.
+
+### extract.py
+For running  `extract.py` one needs the .bam files which are produced by the sorting step.
+This is achievable with the `only_sort.py`script.  
+The script produces data from modkit extract.
+The dataformats produced by this script are .tsv files.
+
+### only_sort
+For running `only_sort.py` one needs the .bam files which are produced in the alignment step.
+This is achievable with the `only_aligner.py` script after running the `basecaller.py`script.
+The script produces data from samtools sort, modkit summary and samtools index.  
+The dataformats produced by this script include .txt files, .bam files, .log files and .bai files.
+
 
 
 ### only_pileup.py
