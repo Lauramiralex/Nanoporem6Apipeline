@@ -167,7 +167,7 @@ The script produces data from modkit pileup and samtools index while also provid
 The dataformats produced by this script include .bam files,.txt files, .bed files, .bai files, .tsv files and .log files. 
 
 ### only_tbi.py
-For running ònly_tbi.py' one needs the .bed files which are produced in the pileup step.   
+For running `only_tbi.py` one needs the .bed files which are produced in the pileup step.   
 The script produces data from bgzip and tabix and is crucial for the success of the dmr.   
 The dataformats produced by  this script include .bed.gz files and .bed.gz.tbi files.  
 
@@ -197,13 +197,6 @@ For running `only_sort.py` one needs the .bam files which are produced in the al
 This is achievable with the `only_aligner.py` script after running the `basecaller.py`script.
 The script produces data from samtools sort, modkit summary and samtools index.  
 The dataformats produced by this script include .txt files, .bam files, .log files and .bai files.
-
-
-
-### only_pileup.py
-For running `only_pileup.py` one needs the results/aligned/indexed.bam.bai and results/aligned/sorted.bam files in a file called `{path to pod5 files}/{name of experiment|control}/results/aligned`. This is achievable with the `aligner.py` script or the `onlyalign.py`script.   
-The script produces data from modkit pileup  while also providing a summary.  
-The dataformats produced by this script include .txt files, .bai files, .bed files, .bam files and .log files.
 
 
 
