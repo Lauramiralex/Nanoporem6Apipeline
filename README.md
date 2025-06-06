@@ -147,7 +147,7 @@ After activating the Environment ( see step 'Creating Conda Environment') one is
 While being in the `main folder` the command  
    ```snakemake --cores all -s workflow/scriptname.py --jobs 1 ```  
 runs the desired script on the previous determined pod5  files.  
-In case one wants to run the script in the background use the command
+In case one wants to run the script in the background use the command   
    ```nohup snakemake --cores all -s workflow/scriptname.py --jobs 1 -p > output.log 2>&1 &```   
 
 In case one wants to only run a certain part, make sure that the required data is correctly named in the folders from the step bevor.    
