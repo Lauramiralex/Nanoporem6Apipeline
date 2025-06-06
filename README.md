@@ -1,15 +1,16 @@
 # Pipeline for Nanopore Data Analysis
 
 This pipeline is designed for the analysis of Nanopore sequencing data, specifically POD5 files.  
-It processes experimental and control group data by performing basecalling and genome alignment 
-followed by differentially methylated region (DMR) analysis.  
+It processes experimental and control group data by performing basecalling and genome alignment,
+followed by differentially methylated region (DMR) analysis.   
 
 # Introduction
 ## Biological Motivation
 
-High-resolution DNA sequencing and analysis are fundamental to modern biological research and clinical diagnostics. By extracting DNA material and subjecting it to high-throughput sequencing, we gain detailed insights into the genetic and epigenetic composition of a sample. This provides a foundation for studying gene regulation, disease mechanisms, evolutionary processes and  developmental biology.
+High-resolution DNA sequencing and analysis are fundamental to modern biological research and clinical diagnostics. By extracting DNA material and subjecting it to high-throughput sequencing, we gain detailed insights into the genetic and epigenetic composition of a sample. This provides a foundation for studying gene regulation, disease mechanisms, evolutionary processes, and developmental biology.   
 
-Sequencing DNA allows researchers to determine the nucleotide sequence of specific genomic regions or even entire genomes. This information is essential for identifying genetic variations such as insertions or deletions, characterizing genes and their regulatory elements and investigating genome-wide changes in different biological conditions or individuals.
+Sequencing DNA allows researchers to determine the nucleotide sequence of specific genomic regions or even entire genomes.  
+This information is essential for identifying genetic variations such as insertions or deletions, characterizing genes and their regulatory elements, and investigating genome-wide changes under different biological conditions or between individuals.   
 
 ## Nanopore
 
@@ -17,12 +18,12 @@ Nanopore sequencing is a third-generation sequencing technology that enables the
 As nucleotides pass through the nanometer-scale hole which is embedded in a membrane (pore), they cause characteristic changes in an ionic current. These changes are detected in real-time and translated into nucleotide sequences through basecalling algorithms.
 
 Nanopore sequencing offers several distinct advantages over traditional sequencing technologies, particularly in its ability to generate long reads and directly detect native DNA or RNA molecules. This does not only simplify experimental workflows but also expands the range of biological insights that can be obtained from a single sequencing run.
-A distinct advatage of nanopore sequencing is its capacity to detect base modifications directly from the ionic current signal eliminating the need for chemical conversion protocols which are traditionally used in DNA methylation analysis.
-This simplifies the experimental workflow and enables to preserve the biological context, including strand orientation and base modification. Moreover, by eliminating PCR amplification, nanopore sequencing reduces bias and enables the analysis of native DNA and RNA molecules.
+A distinct advantage of nanopore sequencing is its capacity to detect base modifications directly from the ionic current signal, eliminating the need for chemical conversion protocols which are traditionally used in DNA methylation analysis.
+This simplifies the experimental workflow and enables the preservation of the biological context, including strand orientation and base modification. Moreover, by eliminating PCR amplification, nanopore sequencing reduces bias and enables the analysis of native DNA and RNA molecules.
 
 ## m6A
 
-m6A is a chemical modification in which a methyl group is added to the nitrogen at position 6 of adenosine. It is the most abundant internal modification found in messenger RNA and long non-coding RNA in eukaryotic cells. m6A is typically found in conserved sequence motifs and is frequently enriched near stop codons, within long exons and in 3' untranslated regions. Its writer mark is deposited by a methyltransferase complex and it can be removed by demethylases such as FTO. Specialized m6A-binding proteins recognize and interprete this mark to influence downstream RNA metabolism.
+m6A is a chemical modification in which a methyl group is added to the nitrogen at position 6 of adenosine. It is the most abundant form of internal modification of posttranscriptional RNA and long non-coding RNA in eukaryotic cells. m6A is typically found in conserved sequence motifs and is frequently enriched near stop codons, within long exons and in 3' untranslated regions. Its writer mark is deposited by a methyltransferase complex and it can be removed by demethylases such as FTO. Specialized m6A-binding proteins recognize and interprete this mark to influence downstream RNA metabolism.
 Functinally, m6A plays a central role in post-transcriptional gene regulation influencing critical processes such as mRNA stability, translation efficiency and RNA splicing. Changes in its patterns have been associated with cancer, viral infections and neurological disorders.
 
 
@@ -61,7 +62,7 @@ Download the Anaconda3 (Python 3 version) 64-bit installer for Linux.
 
 For an in-depth installation guide please look into the [Anaconda Documentation](https://www.anaconda.com/docs/getting-started/anaconda/install)
 ### Creating Conda Environment
-After installing Conda one should create a dedicated environment for the project in which one cann install all further necessary packages.
+After installing Conda one should create a dedicated environment for the project in which one can install all further necessary packages.
 ```conda create --name nanoporepipe python=3.8```  
 Activate the environment with:  
 ```conda activate nanoporepipe```  
@@ -74,7 +75,8 @@ conda config --add channels conda-forge
 conda config --add channels bioconda
 conda config --add channels defaults
  ```   
-For an in-depth installation guide please look into the [Bioconda Documentation](https://bioconda.github.io)
+For an in-depth installation guide please look into the [Bioconda Documentation](https://bioconda.github.io)  
+
 ## Installing Snakemake
 Snakemake is used for workflow management. Install Snakemake in terminal:  
 ```conda install -c conda-forge snakemake ```  
@@ -84,14 +86,17 @@ For an in-depth installation guide please look into the [Snakemake Documentation
 ### Modkit
 Modkit is a bioinformatics tool available via Bioconda. Install Modkit in terminal:  
 ```conda install -c bioconda modkit```  
+
 ### Dorado
-Dorado is a tool for nanopore data analysis provided by Oxford Nanopore Technologies.Install Dorado in terminal:  
+Dorado is a tool for nanopore data analysis provided by Oxford Nanopore Technologies. Install Dorado in terminal:  
 ```conda install -c bioconda dorado```  
 For an in-depth installation guide please look into the [Dorado guide by Nanopore](https://github.com/nanoporetech/dorado)
+
 ### Samtools
 Samtools is a widely used tool for processing SAM/BAM files. Install Samtools in terminal:  
 ```conda install -c bioconda samtools```   
 For an in-depth installation guide please look into the [Samtools Documentation](https://www.htslib.org)
+
 ### Bgzip and Tabix
 Bgzip is a version of gzip optimized for handling large files.  
 Tabix is a tool for indexing compressed files, especially useful with VCF and GFF files.  
@@ -115,7 +120,7 @@ To successfully run the scripts in this repository, follow the steps below to mo
 
 ## 1. Setup Working Structure
 Before running the script, the following structure should be in place:  
-   - The workflow folder and the config folder (download from repository) have to be in the same directory   
+   - The workflow folder and the config folder (downloaded from repository) have to be in the same directory.     
    
 ## 2. Customizing samples.tsv
 The script requires POD5 files to function correctly. Follow these rules while modifying the sample.tsv file in the config folder: 
@@ -140,14 +145,16 @@ With this setup, the script should run correctly.
 Befor running the script make sure to follow the Setup instructions.  
 After activating the Environment ( see step 'Creating Conda Environment') one is ready to let the script run.  
 While being in the `main folder` the command  
-   ```snakemake --cores all -s scriptname.py --jobs 1 ```  
+   ```snakemake --cores all -s workflow/scriptname.py --jobs 1 ```  
 runs the desired script on the previous determined pod5  files.  
+In case one wants to run the script in the background use the command
+   ```nohup snakemake --cores all -s workflow/scriptname.py --jobs 1 -p > output.log 2>&1 &```   
 
 In case one wants to only run a certain part, make sure that the required data is correctly named in the folders from the step bevor.    
 Run the same command with the name of the script for the required part.  
 
 ### completerun.py
-For running `completerun.py` one needs the pod5 files in a file which path needs to be provided in samples.tsv.  
+For running `completerun.py` one needs the pod5 files in a file which paths need to be provided in samples.tsv.  
 The script produces data from basecalling, alignment, pileup and dmr while also providing summarys after each step.  
 The dataformats produced by this script include .bam files, .txt files, .tsv files, .bed files and .log files.
 
