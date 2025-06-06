@@ -10,7 +10,7 @@ rule align:
     log:
         "{output_dir}/{name}{replicate}/log/aligned.log"
     shell:
-        "dorado aligner {input.genome} {input.bam} --output-dir {wildcards.output_dir}/{wildcards.name}{wildcards.replicate}/aligned  --emit-summary 2> {log}"
+        "dorado aligner {input.genome} {input.bam} --output-dir {wildcards.output_dir}/{wildcards.name}{wildcards.replicate}/aligned 2> {log}"
         
 
 rule summarize_aligner:

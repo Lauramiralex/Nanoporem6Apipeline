@@ -45,7 +45,7 @@ rule all:
         expand("{output_dir}/{name}{replicate}/pileup/pileup.bed",zip, name=samples["name"],replicate= samples["replicate"],output_dir=[config["output_dir"]] * len(samples)),
         expand("{output_dir}/{name}{replicate}/pileup/pileup.bed.gz",zip, name=samples["name"],replicate= samples["replicate"],output_dir=[config["output_dir"]] * len(samples)),
         expand("{output_dir}/{name}{replicate}/pileup/pileup.bed.gz.tbi",zip, name=samples["name"],replicate= samples["replicate"],output_dir=[config["output_dir"]] * len(samples)),
-        f"{config["output_dir"]}/results/dmr_out.txt"
+        f"{config['output_dir']}/results/dmr_out.txt"
     output:
         f"{timestamp}_final_marker_align.done"  
     shell:
